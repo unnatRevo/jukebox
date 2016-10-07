@@ -1,0 +1,70 @@
+<?php
+session_start();
+//   require('../../Models/FilesOpearations/FilesOpearationsModel.php');
+  $user = $_SESSION['username'];
+  $files = $_FILES['fileUpload'];
+  $filePath = "D:\\userdata\\$user";
+  $uploadPath = "D:\\userdata\\$user\\";
+  static $upload = 1;
+
+  // class ErrorNumber extends SplEnum {
+  //   const __default = self::ERROR;
+  //
+  //   const ERROR = 1;
+  //   const FILE_EXIST = 2;
+  //   const CANNOT_CREATE_FOLDER = 3;
+  //   const CANNOT_UPLOAD = 4;
+  // }
+
+  function setFileDetails ( $file, $path ) {
+
+  }
+
+  function fileMove ( $file, $uploadPath, $path ) {
+    $isSuccess = false;
+    $target_dir = $uploadPath;
+    $target_file = $target_dir . basename($file["name"]);
+    $fileType = pathinfo($target_file,PATHINFO_EXTENSION);
+
+    if(isset($_POST["btnUpload"])) {
+         echo "<script>alert('".$file['type']."');'</script>";
+    }
+    // Check folder exits
+    if (is_dir($path)) {
+        $upload = 1;
+    } else {
+        if (mkdir($path)) {
+            $upload = 1;
+        } else {
+            $upload = 0;
+        }
+    }
+    // Check if file already exists
+    if (file_exists($target_file)) {
+        echo "<script> alert('Sorry, file already exists.'); </script>";
+        $isSuccess = false;
+        $upload = 0;
+    }
+
+    // Check if $upload is set to 0 by an error
+    if ($upload == 0) {
+        echo "Sorry, your file was not uploaded.";
+        $isSuccess = false;
+    } else {
+        if (move_uploaded_file($file["tmp_name"], $target_file)) {
+            echo "The file <strong>". basename( $file["name"]). "</strong> has been uploaded.";
+            $isSuccess = true;
+        } else {
+            echo "Sorry, there was an error uploading your file.";
+            $isSuccess = false;
+        }
+    }
+
+    return $isSuccess;
+  }
+
+  setFileDetails($files, $filePath);
+  if ( fileMove($files, $uploadPath, $filePath) ) {
+    echo "Uploaded Successfully.";
+  }
+?>

@@ -1,0 +1,28 @@
+<?php
+	class dbOperations{
+		function DBConnect() {
+			$servername = "localhost";
+			$username="root";
+			$password="root";
+			$dbName = "JukeBox";
+			
+			try {
+				$con = mysqli_connect($servername, 
+								$username,
+								$password,
+								$dbname);
+				return $con;
+			} catch ( Exception $e ) {
+				echo "<script>"
+						."alert('"
+						.die("Database Connection error : " . mysqli_error());
+						."');";
+					."</script>";
+			}
+		}
+		
+		function login ( $username, $password ) {
+			$connection = $this -> DBConnect();
+		}
+	}
+?>
