@@ -1,43 +1,49 @@
 <?php
 session_start();
-//   require('../../Models/FilesOpearations/FilesOpearationsModel.php');
+  // require('../../Models/FilesOpearations/FilesOpearationsModel.php');
   $user = $_SESSION['username'];
   $files = $_FILES['fileUpload'];
-  $filePath = "D:\\userdata\\$user";
-  $uploadPath = "D:\\userdata\\$user\\";
+  $filePath = "/home/wacky_coder/userdata/".$user;
+  $uploadPath = "/home/wacky_coder/userdata/".$user."/";
   static $upload = 1;
 
-  // class ErrorNumber extends SplEnum {
-  //   const __default = self::ERROR;
-  //
-  //   const ERROR = 1;
-  //   const FILE_EXIST = 2;
-  //   const CANNOT_CREATE_FOLDER = 3;
-  //   const CANNOT_UPLOAD = 4;
-  // }
-
   function setFileDetails ( $file, $path ) {
+    $target_file = $target_dir . basename($file["name"]);
 
+    $fileName = $file['name'];
+    $fileSize = ( $file['size'] / 1024 ) / 1024;
+    $fileType = $file['type'];
+    $filePath = $path . $fileName;
+    $fileExtension = pathinfo($target_file,PATHINFO_EXTENSION);
+    $fileUploadError = $file['error'];
+
+    $fileObject = new db_FileOperations();
+    $details = $fileObject->fileDetails($user, $fileName, $fileSize, $fileType, $fileExtension, $filePath, $fileUploadError);
   }
 
   function fileMove ( $file, $uploadPath, $path ) {
+
+    // Check folder exits
+    if (is_dir($path)) {
+      echo "<script> alert('$uploadPath : exists.'); </script>";
+        $upload = 1;
+    } else {
+        if (mkdir($path)) {
+            echo "<script> alert('folder created.'); </script>";
+            $upload = 1;
+        } else {
+            echo "<script> alert('Cannot create folder.'); </script>";
+            $upload = 0;
+        }
+    }
+
     $isSuccess = false;
     $target_dir = $uploadPath;
     $target_file = $target_dir . basename($file["name"]);
     $fileType = pathinfo($target_file,PATHINFO_EXTENSION);
 
     if(isset($_POST["btnUpload"])) {
-         echo "<script>alert('".$file['type']."');'</script>";
-    }
-    // Check folder exits
-    if (is_dir($path)) {
-        $upload = 1;
-    } else {
-        if (mkdir($path)) {
-            $upload = 1;
-        } else {
-            $upload = 0;
-        }
+         echo "<script>alert('$fileType');'</script>";
     }
     // Check if file already exists
     if (file_exists($target_file)) {
@@ -56,15 +62,12 @@ session_start();
             $isSuccess = true;
         } else {
             echo "Sorry, there was an error uploading your file.";
+            header('Location : ../../Views/Welcome.php');
             $isSuccess = false;
         }
     }
-
     return $isSuccess;
   }
 
-  setFileDetails($files, $filePath);
-  if ( fileMove($files, $uploadPath, $filePath) ) {
-    echo "Uploaded Successfully.";
-  }
+  setFileDetails($files, $uploadPath);
 ?>

@@ -7,5 +7,8 @@
   session_destroy();
   $_SESSION = array();
 
-  // header('Location:../index.php');
+  $homeDirectory = $_SERVER['SCRIPT_NAME'];
+  $rootDir = explode("/", $homeDirectory);
+
+  header('Location:/'.$rootDir[1].'/index.php');
 ?>

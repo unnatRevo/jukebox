@@ -1,28 +1,55 @@
 <?php
+	if ( !(isset($_SESSION['loginStatus']))){
+		session_start();
+	}
 	class dbOperations{
+
 		function DBConnect() {
-			$servername = "localhost";
+			 $servername = "MYSQL5017.Smarterasp.net";
+			 $username="9f39b3_djb";
+			 $password="P@55w0rd#";
+			 $dbName = "db_9f39b3_djb";
+
+			/*$servername = "localhost";
 			$username="root";
-			$password="root";
-			$dbName = "JukeBox";
-			
-			try {
-				$con = mysqli_connect($servername, 
-								$username,
-								$password,
-								$dbname);
-				return $con;
-			} catch ( Exception $e ) {
+			$password="";
+			$dbName = "JukeBox"; */
+
+			$con = new mysqli($servername,
+							$username,
+							$password,
+							$dbName);
+
+			if ( $con->connect_error ) {
 				echo "<script>"
 						."alert('"
-						.die("Database Connection error : " . mysqli_error());
-						."');";
+						.die("Database Connection error : " . $con->connect_error)
+						."');"
 					."</script>";
 			}
-		}
-		
-		function login ( $username, $password ) {
-			$connection = $this -> DBConnect();
-		}
-	}
+			return $con;
+		}	// end of DBConnect();
+
+		function userLogin ( $username, $password ) {
+			$con = $this->DBConnect();
+			$sqlQuery = "select Username, EmailId, Password from logindetail where"
+									."(Username like'$username' and Password like '$password') or"
+									."(EmailId like'$username' and Password like '$password')";
+
+			if ($con->connect_error) {
+					die ("Connection Error : " .  $con->connect_error);
+			}
+				$result = $con->query($sqlQuery);
+				$_SESSION["loginStatus"] = 1;
+				$_SESSION["username"] = $username;
+				header('Location:../Views/Welcome.php');
+				if (!($con->close())) {
+					die ("Error : " . $con->connect_error);
+				}
+			}	// end of userLogin
+
+		function userSignup (){
+
+		}	// end of userSignup
+	}	//end of class
 ?>

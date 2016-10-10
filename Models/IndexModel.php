@@ -5,10 +5,10 @@
 	class dbOperations{
 
 		function DBConnect() {
-			// $servername = "MYSQL5017.Smarterasp.net";
-			// $username="9f39b3_djb";
-			// $password="P@55w0rd#";
-			// $dbName = "db_9f39b3_djb";
+			//  $servername = "MYSQL5017.Smarterasp.net";
+			//  $username="9f39b3_djb";
+			//  $password="P@55w0rd#";
+			//  $dbName = "db_9f39b3_djb";
 
 			$servername = "localhost";
 			$username="root";

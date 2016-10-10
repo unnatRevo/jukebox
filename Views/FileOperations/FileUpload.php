@@ -362,7 +362,19 @@ session_start();
                         <form action="../../Controllers/FileOperations/FileUpload.php" method="post" enctype="multipart/form-data">
                           <p><input type="file" name="fileUpload" id="fileupload"/></p>
                           <p><button type="submit" value="Upload" name="btnUpload" class="btn btn-default">Upload Files</button></p>
-                          <p><lable style="visibility: hidden;">----</label>
+                          <?php
+                            
+                            $isSuccess = "Error In file upload";
+                            if (!isset($_SESSION['fileupload'])){
+                              echo"<p><lable style='visibility: hidden;'>----</label></p>"; 
+                            } elseif( $_SESSION['fileupload'] == 1) {
+                              $isSuccess = "File uploaded successfully.";
+                              echo"<p><lable style='visibility: visible;'>$isSuccess</label></p>";
+                            } elseif ($_SESSION['fileupload'] == 0) {
+                              $isSuccess = "File uploaded successfully.";
+                              echo"<p><lable style='visibility: visible;'>$isSuccess</label></p>";
+                            }
+                          ?>
                         </form>
                       </div>
                       </p>
