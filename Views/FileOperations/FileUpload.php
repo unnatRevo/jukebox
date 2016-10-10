@@ -267,8 +267,7 @@ session_start();
                   <li class="user-header">
                     <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
                     <p>
-                      <?php echo $user; ?> - Web Developer
-                      <small>Member since Nov. 2012</small>
+                      <?php echo $user; ?> - Web Developer                      
                     </p>
                   </li>
                   <!-- Menu Body -->
@@ -362,18 +361,19 @@ session_start();
                         <form action="../../Controllers/FileOperations/FileUpload.php" method="post" enctype="multipart/form-data">
                           <p><input type="file" name="fileUpload" id="fileupload"/></p>
                           <p><button type="submit" value="Upload" name="btnUpload" class="btn btn-default">Upload Files</button></p>
-                          <?php
-                            
-                            $isSuccess = "Error In file upload";
-                            if (!isset($_SESSION['fileupload'])){
+                          <?php     
+                          global $isSuccess ;                       
+                            if (!isset($_SESSION['fileUploadStatus'])){
                               echo"<p><lable style='visibility: hidden;'>----</label></p>"; 
-                            } elseif( $_SESSION['fileupload'] == 1) {
-                              $isSuccess = "File uploaded successfully.";
-                              echo"<p><lable style='visibility: visible;'>$isSuccess</label></p>";
-                            } elseif ($_SESSION['fileupload'] == 0) {
-                              $isSuccess = "File uploaded successfully.";
-                              echo"<p><lable style='visibility: visible;'>$isSuccess</label></p>";
+                            } elseif( $_SESSION['fileUploadStatus'] == 1) {
+                              static $isSuccess = "File uploaded successfully.";
+                            } elseif ($_SESSION['fileUploadStatus'] == 0) {
+                              $isSuccess = "File uploaded failed.";                              
+                            } elseif  ($_SESSION['fileUploadStatus'] = -1) {
+                                $isSuccess = "Connection Error. File upload failed.";
                             }
+                            echo"<p><lable style='visibility: visible;'>$isSuccess</label></p>";
+                            unset($_SESSION['fileUploadStatus']);
                           ?>
                         </form>
                       </div>
