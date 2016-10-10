@@ -8,8 +8,9 @@
   $filePath = "../../userdata/".$_SESSION['username'];
   
 
-  function setFileDetails ( $file, $path ) {
-    $target_file = $path."/". basename($file["name"]);
+  function setFileDetails ( $file ) {
+    $rootDirectory = explode('/', $_SERVER['SCRIPT_NAME']);
+    $target_file = $rootDirectory[1]."/userdata/".$_SESSION['username'].'/'. basename($file["name"]);
     
     $user = $_SESSION['username'];
     $fileName = $file['name'];
