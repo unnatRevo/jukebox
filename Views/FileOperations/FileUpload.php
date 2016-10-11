@@ -267,7 +267,7 @@ session_start();
                   <li class="user-header">
                     <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
                     <p>
-                      <?php echo $user; ?> - Web Developer                      
+                      <?php echo $user; ?> - Web Developer
                     </p>
                   </li>
                   <!-- Menu Body -->
@@ -361,14 +361,14 @@ session_start();
                         <form action="../../Controllers/FileOperations/FileUpload.php" method="post" enctype="multipart/form-data">
                           <p><input type="file" name="fileUpload" id="fileupload"/></p>
                           <p><button type="submit" value="Upload" name="btnUpload" class="btn btn-default">Upload Files</button></p>
-                          <?php     
-                          global $isSuccess ;                       
+                          <?php
+                          global $isSuccess ;
                             if (!isset($_SESSION['fileUploadStatus'])){
-                              echo"<p><lable style='visibility: hidden;'>----</label></p>"; 
+                              echo"<p><lable style='visibility: hidden;'>----</label></p>";
                             } elseif( $_SESSION['fileUploadStatus'] == 1) {
                               static $isSuccess = "File uploaded successfully.";
                             } elseif ($_SESSION['fileUploadStatus'] == 0) {
-                              $isSuccess = "File uploaded failed.";                              
+                              $isSuccess = "File uploaded failed.";
                             } elseif  ($_SESSION['fileUploadStatus'] = -1) {
                                 $isSuccess = "Connection Error. File upload failed.";
                             }

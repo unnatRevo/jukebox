@@ -14,11 +14,11 @@
     <title>JukeBox</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="css/simple-sidebar.css" rel="stylesheet">
-		<link href="css/font-awesome.css" rel="stylesheet">
+    <link href="../../css/simple-sidebar.css" rel="stylesheet">
+		<link href="../../css/font-awesome.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -48,43 +48,24 @@
                   		</nav>
                   </p>
                   <div class="omb_login">
-                      <h3 class="omb_authTitle">Login or <a href="Views/Account/Signup.php">Sign up</a></h3>
-                      <div class="row omb_row-sm-offset-3 omb_socialButtons">
-                          <div class="col-xs-4 col-sm-3">
-                              <a href="#" class="btn btn-lg btn-block omb_btn-facebook">
-                                  <i class="fa fa-facebook visible-xs"></i>
-                                  <span class="hidden-xs">Facebook</span>
-                              </a>
-                          </div>
-                          <div class="col-xs-4 col-sm-3">
-                              <a href="#" class="btn btn-lg btn-block omb_btn-google">
-                                  <i class="fa fa-google-plus visible-xs"></i>
-                                  <span class="hidden-xs">Google</span>
-                              </a>
-                          </div>
-                      </div>
-
-                      <div class="row omb_row-sm-offset-3 omb_loginOr">
-                          <div class="col-xs-12 col-sm-6">
-                              <hr class="omb_hrOr">
-                              <span class="omb_spanOr">or</span>
-                          </div>
-                      </div>
-
+                    <h3 class="omb_authTitle">Sign up</h3>
                       <div class="row omb_row-sm-offset-3">
                           <div class="col-xs-12 col-sm-6">
-                              <form class="omb_loginForm" action="Controllers/Account/loginback.php" autocomplete="off" method="POST">
+                              <form class="omb_loginForm" action="../../Controllers/Account/UserSignup.php" autocomplete="off" method="POST">
                                   <div class="input-group">
                                       <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                      <input type="text" class="form-control" name="txtLoginUsername" placeholder="Username or email">
-                                  </div>
-                                  <span class="help-block"></span>
+                                      <input type="text" class="form-control" name="txtSignupUsername" placeholder="Email">
+                                  </div><span class="help-block" style="visibility:hidden;">Email</span>
 
                                   <div class="input-group">
                                       <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                                      <input  type="password" class="form-control" name="txtLoginPassword" placeholder="Password">
-                                  </div>
-                                  <span class="help-block" style="visibility:hidden;">Password error</span>
+                                      <input  type="password" class="form-control" name="txtSignupPassword" placeholder="Password">
+                                  </div> <span class="help-block" style="visibility:hidden;">Password error</span>
+
+                                  <div class="input-group">
+                                      <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                      <input  type="password" class="form-control" name="txtSignupConfirmPassword" placeholder="Confirm Password">
+                                  </div> <span class="help-block" style="visibility:hidden;">Confirm Password error</span>
 
                                   <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
                               </form>
@@ -113,10 +94,10 @@
     <!-- /#wrapper -->
 
     <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+    <script src="../../js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
 
     <!-- Menu Toggle Script -->
     <script>

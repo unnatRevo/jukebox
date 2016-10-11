@@ -42,7 +42,7 @@
 				$result = $con->query($sqlQuery);
 				$_SESSION["loginStatus"] = 1;
 				$_SESSION["username"] = $username;
-				header('Location:../Views/Welcome.php');
+				header('Location:../../Views/Welcome.php');
 				if (!($con->close())) {
 					die ("Error : " . $con->connect_error);
 				}
