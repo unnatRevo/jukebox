@@ -3,7 +3,7 @@
 		session_start();
 	}
 	class dbOperations{
-
+		public $rootDirectory = $_SERVER['SCRIPT_NAME'];
 		function DBConnect() {
 			//  $servername = "MYSQL5017.Smarterasp.net";
 			//  $username="9f39b3_djb";
@@ -47,9 +47,5 @@
 					die ("Error : " . $con->connect_error);
 				}
 			}	// end of userLogin
-
-		function userSignup (){
-
-		}	// end of userSignup
 	}	//end of class
 ?>

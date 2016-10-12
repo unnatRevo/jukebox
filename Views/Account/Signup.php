@@ -51,7 +51,7 @@
                     <h3 class="omb_authTitle">Sign up</h3>
                       <div class="row omb_row-sm-offset-3">
                           <div class="col-xs-12 col-sm-6">
-                              <form class="omb_loginForm" action="../../Controllers/Account/UserSignup.php" autocomplete="off" method="POST">
+                              <form class="omb_loginForm" action="../../Controllers/Account/Signup.php" autocomplete="on" method="POST">
                                   <div class="input-group">
                                       <span class="input-group-addon"><i class="fa fa-user"></i></span>
                                       <input type="text" class="form-control" name="txtSignupUsername" placeholder="Email">
