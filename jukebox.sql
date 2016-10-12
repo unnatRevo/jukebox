@@ -1,129 +1,93 @@
--- phpMyAdmin SQL Dump
--- version 4.6.4
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Generation Time: Oct 11, 2016 at 01:14 PM
--- Server version: 5.7.14
--- PHP Version: 5.6.25
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `jukebox`
---
-
+-- --------------------------------------------------------
+-- Host:                         localhost
+-- Server version:               5.7.14 - MySQL Community Server (GPL)
+-- Server OS:                    Win64
+-- HeidiSQL Version:             9.3.0.4999
 -- --------------------------------------------------------
 
---
--- Table structure for table `filedetails`
---
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
-CREATE TABLE `filedetails` (
-  `ID` int(11) NOT NULL,
+-- Dumping database structure for JukeBox
+CREATE DATABASE IF NOT EXISTS `JukeBox` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `JukeBox`;
+
+
+-- Dumping structure for table JukeBox.filedetails
+CREATE TABLE IF NOT EXISTS `filedetails` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(40) NOT NULL,
   `filename` varchar(250) NOT NULL,
   `filesize` decimal(5,2) NOT NULL,
   `filetype` varchar(50) NOT NULL,
   `fileextension` varchar(10) NOT NULL,
   `filepath` varchar(500) NOT NULL,
-  `fileuploaderror` int(1) NOT NULL
+  `fileuploaderror` int(1) NOT NULL,
+  PRIMARY KEY (`ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `filedetails`
---
+-- Data exporting was unselected.
 
-INSERT INTO `filedetails` (`ID`, `username`, `filename`, `filesize`, `filetype`, `fileextension`, `filepath`, `fileuploaderror`) VALUES
-(1, 'demo', 'temp', '5.20', 'JPG', 'aa', 'aa', 1),
-(2, 'demo', 'temp', '5.20', 'JPG', 'aa', 'aa', 1),
-(3, 'demo', 'I Miss U.mp3', '0.00', '', 'mp3', '../../userdata/demoI Miss U.mp3', 1),
-(4, 'demo', 'Haar Gya Dil.mp3', '6.21', 'audio/mpeg', 'mp3', '../../userdata/demo/Haar Gya Dil.mp3', 0),
-(5, 'demo', 'I Miss U.mp3', '4.30', 'audio/mpeg', 'mp3', '../../userdata/demo/I Miss U.mp3', 0),
-(6, 'test', 'Aisi Diwangi ko.mp3', '4.57', 'audio/mpeg', 'mp3', '../../userdata/test/Aisi Diwangi ko.mp3', 0);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `logindetail`
---
-
-CREATE TABLE `logindetail` (
-  `ID` int(11) NOT NULL,
+-- Dumping structure for table JukeBox.logindetail
+CREATE TABLE IF NOT EXISTS `logindetail` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
   `Username` varchar(40) DEFAULT NULL,
-  `Password` varchar(30) NOT NULL
+  `Password` varchar(30) NOT NULL,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `logindetail`
---
+-- Data exporting was unselected.
 
-INSERT INTO `logindetail` (`ID`, `Username`, `Password`) VALUES
-(3, 'demo', 'demo'),
-(4, 'test', 'test');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `userdetails`
---
-
-CREATE TABLE `userdetails` (
-  `ID` int(11) NOT NULL,
+-- Dumping structure for table JukeBox.userdetails
+CREATE TABLE IF NOT EXISTS `userdetails` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
   `Firstname` varchar(40) NOT NULL,
   `Lastname` varchar(40) NOT NULL,
   `Email` varchar(50) NOT NULL,
-  `Phone` int(12) NOT NULL
+  `Phone` int(12) NOT NULL,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Indexes for dumped tables
---
+-- Data exporting was unselected.
 
---
--- Indexes for table `filedetails`
---
-ALTER TABLE `filedetails`
-  ADD PRIMARY KEY (`ID`);
 
---
--- Indexes for table `logindetail`
---
-ALTER TABLE `logindetail`
-  ADD PRIMARY KEY (`ID`);
+-- Dumping structure for procedure JukeBox.demo1
+DELIMITER //
+CREATE DEFINER=`root`@`localhost` PROCEDURE `demo1`(in _param1 DateTime , in _param2 varchar(50))
+BEGIN
+	-- set _param1 = current_date ();
+	-- _param2 = 'this is my first test';
+    select _param1 as dt , _param2 as myText;
+END//
+DELIMITER ;
 
---
--- Indexes for table `userdetails`
---
-ALTER TABLE `userdetails`
-  ADD PRIMARY KEY (`ID`);
 
---
--- AUTO_INCREMENT for dumped tables
---
+-- Dumping structure for procedure JukeBox.sp_Signup_user
+DELIMITER //
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_Signup_user`(in _username varchar(40), in _password varchar(40))
+BEGIN
+	INSERT INTO logindetail
+    values
+    (
+		default,
+		_username,
+        _password
+    );
+END//
+DELIMITER ;
 
---
--- AUTO_INCREMENT for table `filedetails`
---
-ALTER TABLE `filedetails`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
---
--- AUTO_INCREMENT for table `logindetail`
---
-ALTER TABLE `logindetail`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT for table `userdetails`
---
-ALTER TABLE `userdetails`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+-- Dumping structure for procedure JukeBox.test
+DELIMITER //
+CREATE DEFINER=`root`@`localhost` PROCEDURE `test`()
+BEGIN
+	select 1 as RowID;
+END//
+DELIMITER ;
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
