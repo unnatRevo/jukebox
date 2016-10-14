@@ -14,7 +14,6 @@
       $userSignupObj->InsertLoginDetails($username, $password);
     }
   }
-
   $object = new UserSignupController();
   $object->SetLoginDetails($username, $password);
 ?>

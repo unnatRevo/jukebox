@@ -1,8 +1,9 @@
 <?php
+session_start();
   /**
-   * @author : Unnat
+   *
    */
-  class UserSignupModel
+  class UserProfileModel
   {
     function DBConnect()
     {
@@ -31,17 +32,16 @@
       return $con;
     }
 
-    function InsertLoginDetails($username, $password)
-    {
+    function InsertUserDetailsModel($fullname, $sex, $bday, $phone) {
       $connection = $this->DBConnect();
-      $statement = $connection->prepare("CALL sp_Signup_user(?,?)");
-      $statement->bind_param('ss', $username, $password);
+
+      $statement = $connection->prepare("CALL sp_SetUserDetails(?,?,?,?,?)");
+      $statement->bind_param('sssss',$fullname, $sex, $bday, $phone, $email);
       $statement->execute();
       $_SESSION['username'] = $username;
       $_SESSION['loginStatus'] = 1;
-      // echo "SP called successfully.";
-      header('Location:../../Views/Account/CreateProfile.php');
+      header('Location:../../Views/Welcome.php');
     }
-
   }
+
 ?>

@@ -54,20 +54,20 @@
                               <form class="omb_loginForm" action="../../Controllers/Account/Signup.php" autocomplete="on" method="POST">
                                   <div class="input-group">
                                       <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                      <input type="text" class="form-control" name="txtSignupUsername" placeholder="Email">
-                                  </div><span class="help-block" style="visibility:hidden;">Email</span>
+                                      <input type="text" class="form-control" name="txtSignupUsername" placeholder="Username" required="true">
+                                  </div><span class="help-block" style="visibility:hidden;">Username</span>
 
                                   <div class="input-group">
                                       <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                                      <input  type="password" class="form-control" name="txtSignupPassword" placeholder="Password">
+                                      <input  type="password" class="form-control" name="txtSignupPassword" placeholder="Password" required="true">
                                   </div> <span class="help-block" style="visibility:hidden;">Password error</span>
 
                                   <div class="input-group">
                                       <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                                      <input  type="password" class="form-control" name="txtSignupConfirmPassword" placeholder="Confirm Password">
+                                      <input  type="password" class="form-control" name="txtSignupConfirmPassword" placeholder="Confirm Password" required="true">
                                   </div> <span class="help-block" style="visibility:hidden;">Confirm Password error</span>
 
-                                  <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+                                  <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
                               </form>
                           </div>
                       </div>

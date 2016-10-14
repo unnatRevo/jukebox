@@ -2,8 +2,8 @@
 	if ( !(isset($_SESSION['loginStatus']))){
 		session_start();
 	}
+	$rootDirectory = $_SERVER['SCRIPT_NAME'];
 	class dbOperations{
-		public $rootDirectory = $_SERVER['SCRIPT_NAME'];
 		function DBConnect() {
 			//  $servername = "MYSQL5017.Smarterasp.net";
 			//  $username="9f39b3_djb";

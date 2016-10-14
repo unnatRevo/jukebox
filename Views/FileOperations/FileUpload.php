@@ -267,7 +267,7 @@ session_start();
                   <li class="user-header">
                     <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
                     <p>
-                      <?php echo $user; ?> - Web Developer
+                      <?php echo $user; ?>
                     </p>
                   </li>
                   <!-- Menu Body -->
@@ -328,7 +328,7 @@ session_start();
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li>
-              <a href="FileOperations/FileUpload.php">
+              <a href="">
                 <i class="fa fa-dashboard"></i> <span>File Upload</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
             </li>
@@ -363,13 +363,14 @@ session_start();
                           <p><button type="submit" value="Upload" name="btnUpload" class="btn btn-default">Upload Files</button></p>
                           <?php
                           global $isSuccess ;
+                          require ('../../Controllers/Enums/ALL_ENUMS.php');
                             if (!isset($_SESSION['fileUploadStatus'])){
                               echo"<p><lable style='visibility: hidden;'>----</label></p>";
-                            } elseif( $_SESSION['fileUploadStatus'] == 1) {
+                            } elseif( $_SESSION['fileUploadStatus'] == new FILE_ENUM(FILE_ENUM::FILE_UPLOAD_DONE)) {
                               static $isSuccess = "File uploaded successfully.";
                             } elseif ($_SESSION['fileUploadStatus'] == 0) {
                               $isSuccess = "File uploaded failed.";
-                            } elseif  ($_SESSION['fileUploadStatus'] = -1) {
+                            } elseif  ($_SESSION['fileUploadStatus'] == -1) {
                                 $isSuccess = "Connection Error. File upload failed.";
                             }
                             echo"<p><lable style='visibility: visible;'>$isSuccess</label></p>";

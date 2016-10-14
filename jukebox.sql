@@ -11,11 +11,13 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 -- Dumping database structure for JukeBox
+DROP DATABASE IF EXISTS `JukeBox`;
 CREATE DATABASE IF NOT EXISTS `JukeBox` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `JukeBox`;
 
 
 -- Dumping structure for table JukeBox.filedetails
+DROP TABLE IF EXISTS `filedetails`;
 CREATE TABLE IF NOT EXISTS `filedetails` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(40) NOT NULL,
@@ -32,30 +34,37 @@ CREATE TABLE IF NOT EXISTS `filedetails` (
 
 
 -- Dumping structure for table JukeBox.logindetail
+DROP TABLE IF EXISTS `logindetail`;
 CREATE TABLE IF NOT EXISTS `logindetail` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `Username` varchar(40) DEFAULT NULL,
-  `Password` varchar(30) NOT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `Username` varchar(40) NOT NULL,
+  `Password` varchar(40) NOT NULL,
+  PRIMARY KEY (`Username`),
+  KEY `ID` (`ID`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- Data exporting was unselected.
 
 
 -- Dumping structure for table JukeBox.userdetails
+DROP TABLE IF EXISTS `userdetails`;
 CREATE TABLE IF NOT EXISTS `userdetails` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `Firstname` varchar(40) NOT NULL,
-  `Lastname` varchar(40) NOT NULL,
-  `Email` varchar(50) NOT NULL,
-  `Phone` int(12) NOT NULL,
-  PRIMARY KEY (`ID`)
+  `fullname` varchar(150) NOT NULL,
+  `gender` varchar(5) NOT NULL,
+  `birthdate` date NOT NULL,
+  `mobilenumber` varchar(15) NOT NULL,
+  `email` varchar(40) NOT NULL,
+  PRIMARY KEY (`mobilenumber`),
+  UNIQUE KEY `email` (`email`),
+  KEY `ID` (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Data exporting was unselected.
 
 
 -- Dumping structure for procedure JukeBox.demo1
+DROP PROCEDURE IF EXISTS `demo1`;
 DELIMITER //
 CREATE DEFINER=`root`@`localhost` PROCEDURE `demo1`(in _param1 DateTime , in _param2 varchar(50))
 BEGIN
@@ -66,9 +75,27 @@ END//
 DELIMITER ;
 
 
--- Dumping structure for procedure JukeBox.sp_Signup_user
+-- Dumping structure for procedure JukeBox.sp_SetUserDetails
+DROP PROCEDURE IF EXISTS `sp_SetUserDetails`;
 DELIMITER //
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_Signup_user`(in _username varchar(40), in _password varchar(40))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_SetUserDetails`(IN `_fullname` VARCHAR(100), IN `_gender` VARCHAR(5), IN `_birthdate` DATE, IN `_mobile` VARCHAR(15), IN `_email` VARCHAR(50))
+BEGIN
+	INSERT INTO userdetails
+	VALUES (
+		_fullname,
+		_gender,
+		_birthdate,
+		_mobile,
+		_email
+	);
+END//
+DELIMITER ;
+
+
+-- Dumping structure for procedure JukeBox.sp_Signup_user
+DROP PROCEDURE IF EXISTS `sp_Signup_user`;
+DELIMITER //
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_Signup_user`(IN `_username` varchar(40), IN `_password` varchar(40))
 BEGIN
 	INSERT INTO logindetail
     values
@@ -82,6 +109,7 @@ DELIMITER ;
 
 
 -- Dumping structure for procedure JukeBox.test
+DROP PROCEDURE IF EXISTS `test`;
 DELIMITER //
 CREATE DEFINER=`root`@`localhost` PROCEDURE `test`()
 BEGIN

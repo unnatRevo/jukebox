@@ -1,8 +1,9 @@
 <?php
     if (!isset($_SESSION)) {
-        session_start();        
-    }	
+        session_start();
+    }
 
+    require ('../../Controllers/Enums/ALL_ENUMS.php');
 	class db_FileOperations{
 
 		function DBConnect() {
@@ -40,9 +41,10 @@
 			}
 
 			if ($con->query($sqlQuery) === TRUE) {
-				$_SESSION['fileUploadStatus'] = 1;
-			} else { 
-				$_SESSION['fileUploadStatus'] = 0;				
+				$_SESSION['fileUploadStatus'] = new FILE_ENUM(FILE_ENUM::FILE_UPLOAD_DONE);
+			} else {
+				// $_SESSION['fileUploadStatus'] = 0;
+        $_SESSION['fileUploadStatus'] = new FILE_ENUM(FILE_ENUM::FILE_UPLOAD_FAILED);
 			}
             $con->close();
 		}	// end of userLogin
