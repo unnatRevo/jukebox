@@ -37,16 +37,15 @@
 			$sqlQuery = "INSERT INTO filedetails VALUES (DEFAULT,'". $user ."', '". $fileName ."', ". $fileSize.", '". $fileType ."', '". $fileExtension ."', '". $filePath."'," . $fileUploadError .")";
 			if ($con->connect_error) {
 					die ("Connection Error : " .  $con->connect_error);
-                    $_SESSION['fileUploadStatus'] = -1;
 			}
 
 			if ($con->query($sqlQuery) === TRUE) {
-				$_SESSION['fileUploadStatus'] = new FILE_ENUM(FILE_ENUM::FILE_UPLOAD_DONE);
+				$_SESSION['fileUploadStatus'] = FILE_ENUM::DB_ENTRY_DONE;
 			} else {
 				// $_SESSION['fileUploadStatus'] = 0;
-        $_SESSION['fileUploadStatus'] = new FILE_ENUM(FILE_ENUM::FILE_UPLOAD_FAILED);
+        $_SESSION['fileUploadStatus'] = FILE_ENUM::DB_ENTRY_FAILE;
 			}
-            $con->close();
+      $con->close();
 		}	// end of userLogin
 	}	//end of class
 ?>

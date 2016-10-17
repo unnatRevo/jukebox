@@ -366,12 +366,28 @@ session_start();
                           require ('../../Controllers/Enums/ALL_ENUMS.php');
                             if (!isset($_SESSION['fileUploadStatus'])){
                               echo"<p><lable style='visibility: hidden;'>----</label></p>";
-                            } elseif( $_SESSION['fileUploadStatus'] == new FILE_ENUM(FILE_ENUM::FILE_UPLOAD_DONE)) {
-                              static $isSuccess = "File uploaded successfully.";
-                            } elseif ($_SESSION['fileUploadStatus'] == 0) {
-                              $isSuccess = "File uploaded failed.";
-                            } elseif  ($_SESSION['fileUploadStatus'] == -1) {
-                                $isSuccess = "Connection Error. File upload failed.";
+                            }
+                            $value = $_SESSION['fileUploadStatus'];
+                            switch ($value) {
+                              case FILE_ENUM::FILE_UPLOAD_DONE:
+                                  $isSuccess = "File uploaded successfully.";
+                                break;
+
+                              case FILE_ENUM::FILE_UPLOAD_FAILED:
+                                  $isSuccess = "File uploaded failed.";
+                                break;
+
+                              case FILE_ENUM::FILE_ALREADY_EXIST:
+                                  $isSuccess = "File already exists.";
+                                break;
+
+                              case FILE_ENUM::ERROR_WHILE_UPLODING:
+                                  $isSuccess = "Error While uploading File.";
+                                break;
+
+                              default:
+                                  $isSuccess = "";
+                                break;
                             }
                             echo"<p><lable style='visibility: visible;'>$isSuccess</label></p>";
                             unset($_SESSION['fileUploadStatus']);

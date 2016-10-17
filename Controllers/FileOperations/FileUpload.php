@@ -4,7 +4,7 @@
    session_start();
   //}
   require('../../Models/FilesOpearations/FilesOpearationsModel.php');
-  require ('../Enums/ALL_ENUMS.php');
+  // require ('../Enums/ALL_ENUMS.php');
   $files = $_FILES['fileUpload'];
   $filePath = "../../userdata/".$_SESSION['username'];
 
@@ -22,7 +22,6 @@
       $fileExtension = pathinfo($target_file,PATHINFO_EXTENSION);
       $fileUploadError = $file['error'];
 
-      echo $filePath."<br><br>";
       $fileObject = new db_FileOperations();
       $details = $fileObject->fileDetails($user, $fileName, $fileSize, $fileType, $fileExtension, $filePath, $fileUploadError);
      }
@@ -32,19 +31,16 @@
       $upload = 1;
       if (!(is_dir('../../userdata'))) {
         if (!mkdir('../../userdata', 0777)){
-          echo "<script> alert('\'userdata\'Folder cannot created. '); </script>";
+          $upload = 0;
         }
       }
 
       if (is_dir($path)) {
-          echo "<script> alert('$path : exists.in else'); </script>";
           $upload = 1;
       } else {
           if (mkdir($path, 0777)) {
-              echo "<script> alert('folder created.'); </script>";
               $upload = 1;
           } else {
-              echo "<script> alert('Cannot create folder.'); </script>";
               $upload = 0;
           }
       }
@@ -54,33 +50,31 @@
       $target_file = $target_dir . basename($file["name"]);
       $fileType = pathinfo($target_file,PATHINFO_EXTENSION);
 
-      echo $target_file."<br>".$file['name']."<br>";
       // Check if file already exists
       if (file_exists($target_file)) {
-          // echo "<script> alert('Sorry, file already exists.'); </script>";
-          $_SESSION['fileUploadStatus'] = new FILE_ENUM(FILE_ENUM::FILE_ALREADY_EXIST);
+          $_SESSION['fileUploadStatus'] = FILE_ENUM::FILE_ALREADY_EXIST;
           $upload = 0;
       }
 
       // Check if $upload is set to 0 by an error
       if ($upload == 0) {
-          echo "Sorry, your file was not uploaded.";
-          $isSuccess = false;
+          $_SESSION['fileUploadStatus'] = FILE_ENUM::FILE_COULD_NOT_UPLOAD;
       } else {
 
           $this->setFileDetails($file, $path);
           $dir = explode('/', $_SERVER['SCRIPT_NAME']);
 
-          if (move_uploaded_file($file["tmp_name"], $target_file) && $_SESSION['fileUploadStatus'] == 1 ) {
-              echo "The file <strong>". basename( $file["name"]). "</strong> has been uploaded.";
-              header("Location:/".$dir[1]."/Views/FileOperations/FileUpload.php");
+          if (move_uploaded_file($file["tmp_name"], $target_file) && $_SESSION['fileUploadStatus'] == FILE_ENUM::DB_ENTRY_DONE ) {
+              // header("Location:/".$dir[1]."/Views/FileOperations/FileUpload.php");
+              $_SESSION['fileUploadStatus'] = FILE_ENUM::FILE_UPLOAD_DONE;
               $isSuccess = true;
           } else {
-              echo "Sorry, there was an error uploading your file.<br><br>";
-              header("Location:/".$dir[1]."/Views/FileOperations/FileUpload.php");
+              $_SESSION['fileUploadStatus'] = FILE_ENUM::ERROR_WHILE_UPLODING;
+              // header("Location:/".$dir[1]."/Views/FileOperations/FileUpload.php");
               $isSuccess = false;
           }
       }
+      header("Location:../../Views/FileOperations/FileUpload.php");
     }
   }
 
