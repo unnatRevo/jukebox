@@ -32,7 +32,7 @@
 			return $con;
 		}	// end of DBConnect();
 
-		function fileDetails ( $user, $fileName, $fileSize, $fileType, $fileExtension, $filePath, $fileUploadError ) {
+		function setFileDetails ( $user, $fileName, $fileSize, $fileType, $fileExtension, $filePath, $fileUploadError ) {
 			$con = $this->DBConnect();
 			$sqlQuery = "INSERT INTO filedetails VALUES (DEFAULT,'". $user ."', '". $fileName ."', ". $fileSize.", '". $fileType ."', '". $fileExtension ."', '". $filePath."'," . $fileUploadError .")";
 			if ($con->connect_error) {
@@ -47,5 +47,11 @@
 			}
       $con->close();
 		}	// end of userLogin
+
+    function getFileDetails( $username ) {
+      $connection = $this->DBConnect();
+      $result = $connection->query("CALL sp_GetUploadedFileDetails('$username')");
+      return $result;
+    }
 	}	//end of class
 ?>

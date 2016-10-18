@@ -11,10 +11,6 @@ session_start();
       || empty($_SESSION['loginStatus'])){
     header('Location:../index.php');
   }
-  //
-  // if ($_SESSION['loginStatus'] == 1) {
-  //   header('Location:Welcome.php');
-  // }
 ?>
 <!DOCTYPE html>
 <html>
@@ -24,28 +20,28 @@ session_start();
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.4 -->
-    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <!-- FontAwesome 4.3.0 -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <!-- Ionicons 2.0.0 -->
     <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
     <!-- Theme style -->
-    <link href="../dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
+    <link href="../../dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
-    <link href="../dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
+    <link href="../../dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
     <!-- iCheck -->
-    <link href="../plugins/iCheck/flat/blue.css" rel="stylesheet" type="text/css" />
+    <link href="../../plugins/iCheck/flat/blue.css" rel="stylesheet" type="text/css" />
     <!-- Morris chart -->
-    <link href="../plugins/morris/morris.css" rel="stylesheet" type="text/css" />
+    <link href="../../plugins/morris/morris.css" rel="stylesheet" type="text/css" />
     <!-- jvectormap -->
-    <link href="../plugins/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
+    <link href="../../plugins/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
     <!-- Date Picker -->
-    <link href="../plugins/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
+    <link href="../../plugins/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
     <!-- Daterange picker -->
-    <link href="../plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
+    <link href="../../plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
     <!-- bootstrap wysihtml5 - text editor -->
-    <link href="../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
+    <link href="../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -59,7 +55,7 @@ session_start();
 
       <header class="main-header">
         <!-- Logo -->
-        <a href="index2.html" class="logo">
+        <a href="../Welcome.php" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><b>J</b>b</span>
           <!-- logo for regular state and mobile devices -->
@@ -87,7 +83,7 @@ session_start();
                       <li><!-- start message -->
                         <a href="#">
                           <div class="pull-left">
-                            <img src="../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+                            <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
                           </div>
                           <h4>
                             Support Team
@@ -99,7 +95,7 @@ session_start();
                       <li>
                         <a href="#">
                           <div class="pull-left">
-                            <img src="../dist/img/user3-128x128.jpg" class="img-circle" alt="User Image" />
+                            <img src="../../dist/img/user3-128x128.jpg" class="img-circle" alt="User Image" />
                           </div>
                           <h4>
                             AdminLTE Design Team
@@ -111,7 +107,7 @@ session_start();
                       <li>
                         <a href="#">
                           <div class="pull-left">
-                            <img src="../dist/img/user4-128x128.jpg" class="img-circle" alt="User Image" />
+                            <img src="../../dist/img/user4-128x128.jpg" class="img-circle" alt="User Image" />
                           </div>
                           <h4>
                             Developers
@@ -123,7 +119,7 @@ session_start();
                       <li>
                         <a href="#">
                           <div class="pull-left">
-                            <img src="../dist/img/user3-128x128.jpg" class="img-circle" alt="User Image" />
+                            <img src="../../dist/img/user3-128x128.jpg" class="img-circle" alt="User Image" />
                           </div>
                           <h4>
                             Sales Department
@@ -135,7 +131,7 @@ session_start();
                       <li>
                         <a href="#">
                           <div class="pull-left">
-                            <img src="../dist/img/user4-128x128.jpg" class="img-circle" alt="User Image" />
+                            <img src="../../dist/img/user4-128x128.jpg" class="img-circle" alt="User Image" />
                           </div>
                           <h4>
                             Reviewers
@@ -263,16 +259,15 @@ session_start();
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="../dist/img/user2-160x160.jpg" class="user-image" alt="User Image" />
+                  <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image" />
                   <span class="hidden-xs"><?php echo $user; ?></span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
-                    <img src="../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+                    <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
                     <p>
-                      <?php echo $user; ?> - Web Developer
-                      <small>Member since Nov. 2012</small>
+                      <?php echo $user; ?>
                     </p>
                   </li>
                   <!-- Menu Body -->
@@ -293,7 +288,7 @@ session_start();
                       <a href="#" class="btn btn-default btn-flat">Profile</a>
                     </div>
                     <div class="pull-right">
-                      <a href="../Controllers/Account/Signout.php" class="btn btn-default btn-flat">Sign out</a>
+                      <a href="../../Controllers/Account/Signout.php" class="btn btn-default btn-flat">Sign out</a>
                     </div>
                   </li>
                 </ul>
@@ -313,11 +308,11 @@ session_start();
           <!-- Sidebar user panel -->
           <div class="user-panel">
             <div class="pull-left image">
-              <img src="../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+              <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
             </div>
             <div class="pull-left info">
               <p><?php echo $user; ?></p>
-              <a href="#"><i class="fa fa-circle text-success"></i>Online</a>
+              <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
           </div>
           <!-- search form -->
@@ -333,12 +328,12 @@ session_start();
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li>
-              <a href="FileOperations/FileUpload.php">
+              <a href="FileUpload.php">
                 <i class="fa fa-dashboard"></i> <span>File Upload</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
             </li>
             <li>
-              <a href="FileOperations/MyUpload.php">
+              <a href="#">
                 <i class="fa fa-dashboard"></i> <span>My Uploads</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
             </li>
@@ -355,85 +350,77 @@ session_start();
           <!-- Small boxes (Stat box) -->
           <div class="row">
             <!-- Left col -->
-            <section class="col-lg-7 connectedSortable">
+            <section class="col-lg-12">
               <!-- Custom tabs (Charts with tabs)-->
-              <div class="nav-tabs-custom">
+            <div class="row">
+            <div class="col-md-12">
+              <div class="box">
+                <div class="box-header with-border">
+                  <h3 class="box-title">My Uploaded List</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <div class="row">
+                    <div class="col-md-8">
+                      <p class="text-center">
+                        <div class="chart">
+                          <div class="box">
+                            <div class="box-header">
+                              <h3 class="box-title">Hover Data Table</h3>
+                            </div><!-- /.box-header -->
+                            <div class="box-body">
+                              <table id="example2" class="table table-bordered table-hover">
+                                <thead>
+                                  <tr>
+                                    <th>Name</th>
+                                    <th>Size</th>
+                                    <th>Type</th>
+                                    <th>Extension</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <!-- <tr>
+                                    <td>Other browsers</td>
+                                    <td>All others</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>U</td>
+                                  </tr> -->
 
-              </div><!-- /.nav-tabs-custom -->
-
-              <!-- Chat box -->
-              <div class="box box-success">
-                <div class="box-header">
-                  <i class="fa fa-comments-o"></i>
-                  <h3 class="box-title">Shout box</h3>
-                  <div class="box-tools pull-right" data-toggle="tooltip" title="Status">
-                    <div class="btn-group" data-toggle="btn-toggle" >
-                      <button type="button" class="btn btn-default btn-sm active"><i class="fa fa-square text-green"></i></button>
-                      <button type="button" class="btn btn-default btn-sm"><i class="fa fa-square text-red"></i></button>
-                    </div>
-                  </div>
-                </div>
-                <div class="box-body chat" id="chat-box">
-                  <!-- chat item -->
-                  <div class="item">
-                    <img src="../dist/img/user4-128x128.jpg" alt="user image" class="online" />
-                    <p class="message">
-                      <a href="#" class="name">
-                        <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> 2:15</small>
-                        Mike Doe
-                      </a>
-                      I would like to meet you to discuss the latest news about
-                      the arrival of the new theme. They say it is going to be one the
-                      best themes on the market
-                    </p>
-                    <div class="attachment">
-                      <h4>Attachments:</h4>
-                      <p class="filename">
-                        Theme-thumbnail-image.jpg
-                      </p>
-                      <div class="pull-right">
-                        <button class="btn btn-primary btn-sm btn-flat">Open</button>
+                                  <?php
+                                    require('../../Controllers/FileOperations/FileUpload.php');
+                                    $object = new FileOperations;
+                                    $result = $object->getFileDetails($user);
+                                    if ( $result->num_rows > 0 ) {
+                                      while ($row = $result->fetch_assoc()) {
+                                        echo "<tr>";
+                                          echo "<td>" . $row["filename"] . "</td>";
+                                          echo "<td>" . $row["filesize"] . "</td>";
+                                          echo "<td>" . $row["filetype"] . "</td>";
+                                          echo "<td>" . $row["fileextension"] . "</td>";
+                                        echo "</tr>";
+                                      }
+                                    }
+                                   ?>
+                                </tbody>
+                                <tfoot>
+                                  <tr>
+                                    <th>Name</th>
+                                    <th>Size</th>
+                                    <th>Type</th>
+                                    <th>Extension</th>
+                                  </tr>
+                                </tfoot>
+                              </table>
+                            </div><!-- /.box-body -->
+                          </div><!-- /.box -->
                       </div>
-                    </div><!-- /.attachment -->
-                  </div><!-- /.item -->
-                  <!-- chat item -->
-                  <div class="item">
-                    <img src="../dist/img/user3-128x128.jpg" alt="user image" class="offline" />
-                    <p class="message">
-                      <a href="#" class="name">
-                        <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> 5:15</small>
-                        Unnat Pandya
-                      </a>
-                      I would like to meet you to discuss the latest news about
-                      the arrival of the new theme. They say it is going to be one the
-                      best themes on the market
-                    </p>
-                  </div><!-- /.item -->
-                  <!-- chat item -->
-                  <div class="item">
-                    <img src="../dist/img/user2-160x160.jpg" alt="user image" class="offline" />
-                    <p class="message">
-                      <a href="#" class="name">
-                        <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> 5:30</small>
-                        Susan Doe
-                      </a>
-                      I would like to meet you to discuss the latest news about
-                      the arrival of the new theme. They say it is going to be one the
-                      best themes on the market
-                    </p>
-                  </div><!-- /.item -->
-                </div><!-- /.chat -->
-                <div class="box-footer">
-                  <div class="input-group">
-                    <input class="form-control" placeholder="Type message..." />
-                    <div class="input-group-btn">
-                      <button class="btn btn-success">Shout</button>
-                    </div>
-                  </div>
-                </div>
-              </div><!-- /.box (chat box) -->
-
-
+                      </p>
+                    </div><!-- /.col -->
+                  </div><!-- /.row -->
+                </div><!-- ./box-body -->
+              </div><!-- /.box -->
+            </div><!-- /.col -->
+          </div><!-- /.row -->
             </section><!-- /.Left col -->
           </div><!-- /.row (main row) -->
 
@@ -608,7 +595,7 @@ session_start();
     </div><!-- ./wrapper -->
 
     <!-- jQuery 2.1.4 -->
-    <script src="../plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <script src="../../plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js" type="text/javascript"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -616,33 +603,33 @@ session_start();
       $.widget.bridge('uibutton', $.ui.button);
     </script>
     <!-- Bootstrap 3.3.2 JS -->
-    <script src="../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="../../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
     <!-- Morris.js charts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-    <script src="../plugins/morris/morris.min.js" type="text/javascript"></script>
+    <script src="../../plugins/morris/morris.min.js" type="text/javascript"></script>
     <!-- Sparkline -->
-    <script src="../plugins/sparkline/jquery.sparkline.min.js" type="text/javascript"></script>
+    <script src="../../plugins/sparkline/jquery.sparkline.min.js" type="text/javascript"></script>
     <!-- jvectormap -->
-    <script src="../plugins/jvectormap/jquery-jvectormap-1.2.2.min.js" type="text/javascript"></script>
-    <script src="../plugins/jvectormap/jquery-jvectormap-world-mill-en.js" type="text/javascript"></script>
+    <script src="../../plugins/jvectormap/jquery-jvectormap-1.2.2.min.js" type="text/javascript"></script>
+    <script src="../../plugins/jvectormap/jquery-jvectormap-world-mill-en.js" type="text/javascript"></script>
     <!-- jQuery Knob Chart -->
-    <script src="../plugins/knob/jquery.knob.js" type="text/javascript"></script>
+    <script src="../../plugins/knob/jquery.knob.js" type="text/javascript"></script>
     <!-- daterangepicker -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js" type="text/javascript"></script>
-    <script src="../plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
+    <script src="../../plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
     <!-- datepicker -->
-    <script src="../plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
+    <script src="../../plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
     <!-- Bootstrap WYSIHTML5 -->
-    <script src="../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>
+    <script src="../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>
     <!-- Slimscroll -->
-    <script src="../plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <script src="../../plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
     <!-- FastClick -->
-    <script src="../plugins/fastclick/fastclick.min.js" type="text/javascript"></script>
+    <script src="../../plugins/fastclick/fastclick.min.js" type="text/javascript"></script>
     <!-- AdminLTE App -->
-    <script src="../dist/js/app.min.js" type="text/javascript"></script>
+    <script src="../../dist/js/app.min.js" type="text/javascript"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="../dist/js/../pages/dashboard.js" type="text/javascript"></script>
+    <script src="../../dist/js/../../pages/dashboard.js" type="text/javascript"></script>
     <!-- AdminLTE for demo purposes -->
-    <script src="../dist/js/demo.js" type="text/javascript"></script>
+    <script src="../../dist/js/demo.js" type="text/javascript"></script>
   </body>
 </html>

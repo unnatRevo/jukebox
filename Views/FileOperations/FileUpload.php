@@ -332,6 +332,11 @@ session_start();
                 <i class="fa fa-dashboard"></i> <span>File Upload</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
             </li>
+            <li>
+              <a href="MyUpload.php">
+                <i class="fa fa-dashboard"></i> <span>My Uploads</span> <i class="fa fa-angle-left pull-right"></i>
+              </a>
+            </li>
           </ul>
         </section>
         <!-- /.sidebar -->
@@ -351,7 +356,7 @@ session_start();
             <div class="col-md-12">
               <div class="box">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Monthly Recap Report</h3>
+                  <h3 class="box-title">File Upload</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   <div class="row">
@@ -365,29 +370,30 @@ session_start();
                           global $isSuccess ;
                           require ('../../Controllers/Enums/ALL_ENUMS.php');
                             if (!isset($_SESSION['fileUploadStatus'])){
-                              echo"<p><lable style='visibility: hidden;'>----</label></p>";
-                            }
-                            $value = $_SESSION['fileUploadStatus'];
-                            switch ($value) {
-                              case FILE_ENUM::FILE_UPLOAD_DONE:
-                                  $isSuccess = "File uploaded successfully.";
-                                break;
+                                echo"<p><lable style='visibility: hidden;'>----</label></p>";
+                            } else {
+                              $value = $_SESSION['fileUploadStatus'];
+                              switch ($value) {
+                                case FILE_ENUM::FILE_UPLOAD_DONE:
+                                    $isSuccess = "File uploaded successfully.";
+                                  break;
 
-                              case FILE_ENUM::FILE_UPLOAD_FAILED:
-                                  $isSuccess = "File uploaded failed.";
-                                break;
+                                case FILE_ENUM::FILE_UPLOAD_FAILED:
+                                    $isSuccess = "File uploaded failed.";
+                                  break;
 
-                              case FILE_ENUM::FILE_ALREADY_EXIST:
-                                  $isSuccess = "File already exists.";
-                                break;
+                                case FILE_ENUM::FILE_ALREADY_EXIST:
+                                    $isSuccess = "File already exists.";
+                                  break;
 
-                              case FILE_ENUM::ERROR_WHILE_UPLODING:
-                                  $isSuccess = "Error While uploading File.";
-                                break;
+                                case FILE_ENUM::ERROR_WHILE_UPLODING:
+                                    $isSuccess = "Error While uploading File.";
+                                  break;
 
-                              default:
-                                  $isSuccess = "";
-                                break;
+                                default:
+                                    $isSuccess = "";
+                                  break;
+                              }
                             }
                             echo"<p><lable style='visibility: visible;'>$isSuccess</label></p>";
                             unset($_SESSION['fileUploadStatus']);

@@ -1,15 +1,16 @@
 <?php
 
-  //if ( !(isset($_SESSION)) ) {
+  if ( !(isset($_SESSION)) ) {
    session_start();
-  //}
+  }
   require('../../Models/FilesOpearations/FilesOpearationsModel.php');
   // require ('../Enums/ALL_ENUMS.php');
-  $files = $_FILES['fileUpload'];
-  $filePath = "../../userdata/".$_SESSION['username'];
 
   class FileOperations
   {
+    $filePath = "../../userdata/".$_SESSION['username'];
+    $files = $_FILES['fileUpload'];
+    
     function setFileDetails ($file) {
       $rootDirectory = explode('/', $_SERVER['SCRIPT_NAME']);
       $target_file = $rootDirectory[0]."/userdata/".$_SESSION['username'].'/'. basename($file["name"]);
@@ -23,7 +24,7 @@
       $fileUploadError = $file['error'];
 
       $fileObject = new db_FileOperations();
-      $details = $fileObject->fileDetails($user, $fileName, $fileSize, $fileType, $fileExtension, $filePath, $fileUploadError);
+      $details = $fileObject->setFileDetails($user, $fileName, $fileSize, $fileType, $fileExtension, $filePath, $fileUploadError);
      }
 
     function fileMove ( $file, $path ) {
@@ -75,6 +76,11 @@
           }
       }
       header("Location:../../Views/FileOperations/FileUpload.php");
+    }
+
+    function getFileDetails ( $username ) {
+      $object = new FilesOpearationsModel;
+      return $object->getFileDetails($username);
     }
   }
 

@@ -12,4 +12,8 @@
     const ERROR_WHILE_UPLODING = 4;
   }
 
+  abstract class FILE_DETAIS {
+    const RETURN_NO_VALUE = 0;
+    const RETURN_SUCCESS = 1;
+  }
  ?>
