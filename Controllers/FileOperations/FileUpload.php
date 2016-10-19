@@ -1,28 +1,29 @@
 <?php
 
-  if ( !(isset($_SESSION)) ) {
+   if ( !(isset($_SESSION)) ) {
    session_start();
-  }
+   }
   require('../../Models/FilesOpearations/FilesOpearationsModel.php');
   // require ('../Enums/ALL_ENUMS.php');
 
+  $filePath = "../../userdata/" . $_SESSION["username"];
+  // $files = $_FILES['fileUpload'];
+
   class FileOperations
   {
-    $filePath = "../../userdata/".$_SESSION['username'];
-    $files = $_FILES['fileUpload'];
-    
     function setFileDetails ($file) {
       $rootDirectory = explode('/', $_SERVER['SCRIPT_NAME']);
-      $target_file = $rootDirectory[0]."/userdata/".$_SESSION['username'].'/'. basename($file["name"]);
+      $target_file = "../../userdata/".$_SESSION['username'].'/'. basename($file["name"]);
 
       $user = $_SESSION['username'];
       $fileName = $file['name'];
       $fileSize = $file['size'] ;
       $fileType = $file['type'];
-      $filePath = $path .'/'. $fileName;
+      $filePath = $target_file .'/'. $fileName;
       $fileExtension = pathinfo($target_file,PATHINFO_EXTENSION);
       $fileUploadError = $file['error'];
 
+      echo $filePath . "<br><br>";
       $fileObject = new db_FileOperations();
       $details = $fileObject->setFileDetails($user, $fileName, $fileSize, $fileType, $fileExtension, $filePath, $fileUploadError);
      }
@@ -75,15 +76,7 @@
               $isSuccess = false;
           }
       }
-      header("Location:../../Views/FileOperations/FileUpload.php");
-    }
-
-    function getFileDetails ( $username ) {
-      $object = new FilesOpearationsModel;
-      return $object->getFileDetails($username);
+      #header("Location:../../Views/FileOperations/FileUpload.php");
     }
   }
-
-  $obj = new FileOperations;
-  $obj->fileMove($files, $filePath);
 ?>

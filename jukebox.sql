@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `filedetails` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(40) NOT NULL,
   `filename` varchar(250) NOT NULL,
-  `filesize` decimal(5,2) NOT NULL,
+  `filesize` varchar(50) NOT NULL,
   `filetype` varchar(50) NOT NULL,
   `fileextension` varchar(10) NOT NULL,
   `filepath` varchar(500) NOT NULL,
@@ -71,6 +71,44 @@ BEGIN
 	-- set _param1 = current_date ();
 	-- _param2 = 'this is my first test';
     select _param1 as dt , _param2 as myText;
+END//
+DELIMITER ;
+
+
+-- Dumping structure for procedure JukeBox.sp_GetFileDetails
+DROP PROCEDURE IF EXISTS `sp_GetFileDetails`;
+DELIMITER //
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_GetFileDetails`(IN `_username` VARCHAR(40))
+BEGIN
+	SELECT
+		jukebox.filedetails.filename,
+		jukebox.filedetails.filesize,
+		jukebox.filedetails.filetype,
+		jukebox.filedetails.fileextension
+	FROM
+		filedetails
+	WHERE
+		username like _username;
+END//
+DELIMITER ;
+
+
+-- Dumping structure for procedure JukeBox.sp_SetFileDetails
+DROP PROCEDURE IF EXISTS `sp_SetFileDetails`;
+DELIMITER //
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_SetFileDetails`(IN `_username` VARCHAR(40), IN `_filename` VARCHAR(250), IN `_filesize` VARCHAR(50), IN `_filetype` VARCHAR(50), IN `_fileextension` VARCHAR(10), IN `_filepath` VARCHAR(500), IN `_fileuploaderror` INT)
+BEGIN
+	INSERT INTO 
+		filedetails 
+	VALUES 
+		(DEFAULT,
+		_username, 
+		_filename, 
+		_filesize, 
+		_filetype, 
+		_fileextension, 
+		_filepath,
+		fileuploaderror);
 END//
 DELIMITER ;
 

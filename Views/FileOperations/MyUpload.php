@@ -363,10 +363,6 @@ session_start();
                     <div class="col-md-8">
                       <p class="text-center">
                         <div class="chart">
-                          <div class="box">
-                            <div class="box-header">
-                              <h3 class="box-title">Hover Data Table</h3>
-                            </div><!-- /.box-header -->
                             <div class="box-body">
                               <table id="example2" class="table table-bordered table-hover">
                                 <thead>
@@ -387,8 +383,8 @@ session_start();
                                   </tr> -->
 
                                   <?php
-                                    require('../../Controllers/FileOperations/FileUpload.php');
-                                    $object = new FileOperations;
+                                    require('../../Controllers/FileOperations/FileOperationController.php');
+                                    $object = new FileList;
                                     $result = $object->getFileDetails($user);
                                     if ( $result->num_rows > 0 ) {
                                       while ($row = $result->fetch_assoc()) {
@@ -412,7 +408,6 @@ session_start();
                                 </tfoot>
                               </table>
                             </div><!-- /.box-body -->
-                          </div><!-- /.box -->
                       </div>
                       </p>
                     </div><!-- /.col -->

@@ -34,23 +34,30 @@
 
 		function setFileDetails ( $user, $fileName, $fileSize, $fileType, $fileExtension, $filePath, $fileUploadError ) {
 			$con = $this->DBConnect();
-			$sqlQuery = "INSERT INTO filedetails VALUES (DEFAULT,'". $user ."', '". $fileName ."', ". $fileSize.", '". $fileType ."', '". $fileExtension ."', '". $filePath."'," . $fileUploadError .")";
+      $sqlQuery = "CALL sp_SetFileDetails('$user',
+                                      '$fileName',
+                                      $fileSize,
+                                      '$fileType',
+                                      '$fileExtension',
+                                      '$filePath',
+                                      $fileUploadError)";
 			if ($con->connect_error) {
 					die ("Connection Error : " .  $con->connect_error);
-			}
-
-			if ($con->query($sqlQuery) === TRUE) {
-				$_SESSION['fileUploadStatus'] = FILE_ENUM::DB_ENTRY_DONE;
+          return false;
 			} else {
-				// $_SESSION['fileUploadStatus'] = 0;
-        $_SESSION['fileUploadStatus'] = FILE_ENUM::DB_ENTRY_FAILE;
-			}
+          if ($con->query($sqlQuery) === TRUE) {
+            $_SESSION['fileUploadStatus'] = FILE_ENUM::DB_ENTRY_DONE;
+          } else {
+            // $_SESSION['fileUploadStatus'] = 0;
+            $_SESSION['fileUploadStatus'] = FILE_ENUM::DB_ENTRY_FAILE;
+          }
+      }
       $con->close();
 		}	// end of userLogin
 
     function getFileDetails( $username ) {
       $connection = $this->DBConnect();
-      $result = $connection->query("CALL sp_GetUploadedFileDetails('$username')");
+      $result = $connection->query("CALL sp_GetFileDetails('$username')");
       return $result;
     }
 	}	//end of class

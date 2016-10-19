@@ -363,12 +363,23 @@ session_start();
                     <div class="col-md-8">
                       <p class="text-center">
                         <div class="chart">
-                        <form action="../../Controllers/FileOperations/FileUpload.php" method="post" enctype="multipart/form-data">
+                        <form action="<?php echo htmlentities($_SERVER['PHP_SELF']);?>" method="post" enctype="multipart/form-data">
                           <p><input type="file" name="fileUpload" id="fileupload"/></p>
                           <p><button type="submit" value="Upload" name="btnUpload" class="btn btn-default">Upload Files</button></p>
-                          <?php
-                          global $isSuccess ;
-                          require ('../../Controllers/Enums/ALL_ENUMS.php');
+                        </form>
+                        <?php
+                        global $isSuccess ;
+                        // require ('../../Controllers/Enums/ALL_ENUMS.php');
+                        require ('../../Controllers/FileOperations/FileUpload.php');
+
+                        if($_SERVER["REQUEST_METHOD"] == "POST") {
+                          $files = $_FILES['fileUpload'];
+                          $folderPath = "../../userdata/" . $_SESSION["username"];
+
+                          $object = new FileOperations;
+                          $object->setFileDetails($files);
+                          $object->fileMove($_FILES['fileUpload'], $folderPath) ;
+
                             if (!isset($_SESSION['fileUploadStatus'])){
                                 echo"<p><lable style='visibility: hidden;'>----</label></p>";
                             } else {
@@ -397,8 +408,8 @@ session_start();
                             }
                             echo"<p><lable style='visibility: visible;'>$isSuccess</label></p>";
                             unset($_SESSION['fileUploadStatus']);
-                          ?>
-                        </form>
+                        }
+                        ?>
                       </div>
                       </p>
                     </div><!-- /.col -->
