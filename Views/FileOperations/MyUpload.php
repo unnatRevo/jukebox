@@ -364,6 +364,12 @@ session_start();
                       <p class="text-center">
                         <div class="chart">
                             <div class="box-body">
+                            <?php
+                              require('../../Controllers/FileOperations/FileOperationController.php');
+                              $object = new FileList;
+                              $result = $object->getFileDetails($user);
+                              if ( $result->num_rows > 0 ) {
+                              ?>
                               <table id="example2" class="table table-bordered table-hover">
                                 <thead>
                                   <tr>
@@ -374,19 +380,7 @@ session_start();
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  <!-- <tr>
-                                    <td>Other browsers</td>
-                                    <td>All others</td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                    <td>U</td>
-                                  </tr> -->
-
-                                  <?php
-                                    require('../../Controllers/FileOperations/FileOperationController.php');
-                                    $object = new FileList;
-                                    $result = $object->getFileDetails($user);
-                                    if ( $result->num_rows > 0 ) {
+                                      <?php
                                       while ($row = $result->fetch_assoc()) {
                                         echo "<tr>";
                                           echo "<td>" . $row["filename"] . "</td>";
@@ -394,19 +388,27 @@ session_start();
                                           echo "<td>" . $row["filetype"] . "</td>";
                                           echo "<td>" . $row["fileextension"] . "</td>";
                                         echo "</tr>";
-                                      }
+                                      }?>
+                                    </tbody>
+                                    <tfoot>
+                                      <tr>
+                                        <th>Name</th>
+                                        <th>Size</th>
+                                        <th>Type</th>
+                                        <th>Extension</th>
+                                      </tr>
+                                    </tfoot>
+                                  </table>
+                                    <?php
+                                    } else {
+                                      ?>
+                                      <div class="callout callout-info">
+                                        <h1>WhOops!</h1>
+                                        <p><h3><There are no files contributed by you.!!</h3></p>
+                                      </div>
+                                      <?php
                                     }
                                    ?>
-                                </tbody>
-                                <tfoot>
-                                  <tr>
-                                    <th>Name</th>
-                                    <th>Size</th>
-                                    <th>Type</th>
-                                    <th>Extension</th>
-                                  </tr>
-                                </tfoot>
-                              </table>
                             </div><!-- /.box-body -->
                       </div>
                       </p>

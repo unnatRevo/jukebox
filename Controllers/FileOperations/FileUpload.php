@@ -63,7 +63,6 @@
           $_SESSION['fileUploadStatus'] = FILE_ENUM::FILE_COULD_NOT_UPLOAD;
       } else {
 
-          $this->setFileDetails($file, $path);
           $dir = explode('/', $_SERVER['SCRIPT_NAME']);
 
           if (move_uploaded_file($file["tmp_name"], $target_file) && $_SESSION['fileUploadStatus'] == FILE_ENUM::DB_ENTRY_DONE ) {
