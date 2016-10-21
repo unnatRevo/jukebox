@@ -68,7 +68,7 @@
                   		<nav class="navbar navbar-inverse navbar-fixed-top">
                   			<div class="container-fluid">
                   				<div class="navbar-header">
-                  					<a class="navbar-brand" href="#">
+                  					<a class="navbar-brand" href="../../index.php">
                   						<font size="30px;">JukeBox</font>
                   					</a>
                   				</div>
@@ -79,7 +79,7 @@
                     <h3 class="omb_authTitle">It will take a minute only to create profile..</h3>
                       <div class="row omb_row-sm-offset-3">
                           <div class="col-xs-12 col-sm-6">
-                              <form class="omb_loginForm" action="../../Controllers/Account/CreateProfile.php" autocomplete="on" method="POST">
+                              <form class="omb_loginForm" action="<?php echo $_SERVER['PHP_SELF']; ?>" autocomplete="on" method="POST">
                                 <div class="form-group">
                                   <label>Full Name</label>
                                   <div class="input-group">
@@ -128,6 +128,19 @@
                               </div><!-- /.form group -->
                                 <button class="btn btn-lg btn-primary btn-block" type="submit">Finish</button>
                               </form>
+                              <?php
+                                if($_SERVER['REQUEST_METHOD'] == "POST") {
+                                  require('../../Controllers/Account/CreateProfile.php');
+                                  $name = $_POST['txtName'];
+                                  $sex = $_POST['gender'];
+                                  $bday = $_POST['txtBday'];
+                                  $phone = $_POST['txtPhone'];
+                                  $email = $_POST['txtEmail'];
+
+                                  $obj = new CreateProfileController();
+                                  $obj->InsertUserDetailsController($name, $sex, $bday, $phone, $email);
+                                }
+                              ?>
                           </div>
                       </div>
                       <div class="row omb_row-sm-offset-3">

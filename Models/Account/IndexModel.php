@@ -1,4 +1,5 @@
 <?php
+header('Content-type : application/json');
 	if ( !(isset($_SESSION['loginStatus']))){
 		session_start();
 	}
@@ -32,20 +33,31 @@
 
 		function userLogin ( $username, $password ) {
 			$con = $this->DBConnect();
-			$sqlQuery = "select Username, EmailId, Password from logindetail where"
-									."(Username like'$username' and Password like '$password') or"
-									."(EmailId like'$username' and Password like '$password')";
+			$sqlQuery = "CALL sp_CheckUserdetails('$username', '$passsword')";
 
 			if ($con->connect_error) {
 					die ("Connection Error : " .  $con->connect_error);
 			}
-				$result = $con->query($sqlQuery);
-				$_SESSION["loginStatus"] = 1;
-				$_SESSION["username"] = $username;
-				header('Location:../../Views/Welcome.php');
-				if (!($con->close())) {
-					die ("Error : " . $con->connect_error);
-				}
+				$result = $con->prepare("CALL sp_CheckUserdetails('$username', '$passsword')");
+				$result->execute();
+				// if ($result === TRUE ) {
+					$_SESSION["loginStatus"] = 1;
+					$_SESSION["username"] = $username;
+					header('Location:../../Views/Welcome.php');
+					if (!($con->close())) {
+						die ("Error : " . $con->connect_error);
+					}
+				// } else {
+				// 	$_SESSION["loginStatus"] = 0;
+				// 	$_SESSION["username"] = $username;
+				// 	unset('username');
+				// 	unset('loginStatus');
+				// 	session_destroy();
+				// 	header('Location:../../index.php');
+				// 	if (!($con->close())) {
+				// 		die ("Error : " . $con->connect_error);
+				// 	}
+				// }
 			}	// end of userLogin
 	}	//end of class
 ?>

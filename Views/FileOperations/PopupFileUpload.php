@@ -1,3 +1,8 @@
+<?php
+  if (!isset($_SESSION)) {
+    session_start();
+  }
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,8 +12,8 @@
     <!-- jQuery
     ====================================================================== -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <link href="client/fine-uploader-new.css" rel="stylesheet">
-    <script src="client/jquery.fine-uploader.js"></script>
+    <link href="../../client/fine-uploader-new.css" rel="stylesheet">
+    <script src="../../client/jquery.fine-uploader.js"></script>
     <script type="text/template" id="qq-template-validation">
         <div class="qq-uploader-selector qq-uploader" qq-drop-area-text="Drop files here">
             <div class="qq-total-progress-bar-container-selector qq-total-progress-bar-container">
@@ -66,7 +71,7 @@
         </div>
     </script>
 
-    <title>Fine Uploader Validation Demo</title>
+    <title>Upload Files</title>
 </head>
 <body>
     <!-- Fine Uploader DOM Element
@@ -76,21 +81,22 @@
     <!-- Your code to create an instance of Fine Uploader and bind to the DOM/template
     ====================================================================== -->
     <script>
+    var username = "<?php echo $_SESSION['username']; ?>";
         $('#fine-uploader-validation').fineUploader({
             template: 'qq-template-validation',
             request: {
-                endpoint: '/server/uploads'
+                endpoint: '/userdata/' + username;
             },
             thumbnails: {
                 placeholders: {
-                    waitingPath: '/source/placeholders/waiting-generic.png',
-                    notAvailablePath: '/source/placeholders/not_available-generic.png'
+                    waitingPath: '../../fine-uploader/placeholders/waiting-generic.png',
+                    notAvailablePath: '../../fine-uploader/placeholders/not_available-generic.png'
                 }
             },
             validation: {
-                allowedExtensions: ['jpeg', 'jpg', 'txt'],
-                itemLimit: 3,
-                sizeLimit: 51200 // 50 kB = 50 * 1024 bytes
+                allowedExtensions: ['mp3', 'wma', 'mp4', 'mpeg'],
+                itemLimit: 10,
+                sizeLimit: 250000000 // 25 Mb = 25 * (1024 * 3) bytes
             }
         });
     </script>
