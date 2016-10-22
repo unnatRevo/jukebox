@@ -136,7 +136,6 @@
                                   $bday = $_POST['txtBday'];
                                   $phone = $_POST['txtPhone'];
                                   $email = $_POST['txtEmail'];
-
                                   $obj = new CreateProfileController();
                                   $obj->InsertUserDetailsController($name, $sex, $bday, $phone, $email);
                                 }

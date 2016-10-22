@@ -14,5 +14,4 @@
       return $object->getFileDetails($username);
     }
   }
-
 ?>

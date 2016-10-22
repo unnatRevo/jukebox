@@ -31,36 +31,44 @@
         $("#btnLogin").on("click", function(){
           var username = $("#txtUsername").value;
           var password = $("#txtPassword").value;
-          if ( (username == null || username == "") &&
-                (password == null || password == "")
-              ) {
-                $("#lblStatus").show();
-              }
+
+					$.ajax({
+					 type: "POST",
+					 url: 'Models/Account/IndexModel.php',
+					 data: {action: 'userlogin',
+									"username" : username,
+									"password" : password
+									},
+					 success: function()
+					 {
+						 alert('working');
+							window.location = 'Views/Welcome.php';
+					 }
+			 		});
+
         });
       });
 
-      $.ajax({
-          type: "POST",
-          url: 'your_functions_address.php',
-          dataType: 'json',
-          data: {functionname: 'add', arguments: [1, 2]},
-
-          success: function (obj, textstatus) {
-                        if( !('error' in obj) ) {
-                            yourVariable = obj.result;
-                        }
-                        else {
-                            console.log(obj.error);
-                        }
-                  }
-      });
+	// 		var username = $("#txtUsername").value;
+	// 		var password = $("#txtPassword").value;
+	 //
+	// 		$.ajax({
+  //      type: "POST",
+  //      url: 'Models/Account/IndexModel.php',
+  //      data: {action: 'userlogin',
+	// 		 				"username" : username,
+	// 						"password" : password
+	// 	 					},
+  //      success: function()
+  //      {
+  //         window.location = 'Views/Welcome.php';
+  //      }
+  //  });
 
       </script>
   </head>
 
   <body>
-          <!-- /#sidebar-wrapper -->
-
           <!-- Page Content -->
           <div id="page-content-wrapper">
               <div class="container-fluid">
@@ -103,7 +111,8 @@
 
                         <div class="row omb_row-sm-offset-3">
                             <div class="col-xs-12 col-sm-6">
-                                <form class="omb_loginForm" action="Controllers/Account/loginback.php" autocomplete="off" method="POST">
+                                <!-- <form class="omb_loginForm" action="Models/Account/loginback.php" autocomplete="off" method="POST"> -->
+																	<form class="omb_loginForm" autocomplete="on" method="POST">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-user"></i></span>
                                         <input type="text" class="form-control" id="txtUsername"
