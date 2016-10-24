@@ -11,34 +11,16 @@
 	// 	header('Location: ../../index.php');
 	// }
 
-class Users {
+class UsersLogin {
 	public $username = null;
 	public $password = null;
-
-	public function __construct( $data = array() ) {
-		if( isset( $data['txtLoginUsername'] ) ) $this->username = stripslashes( strip_tags( $data['txtLoginUsername'] ) );
-		if( isset( $data['txtLoginPassword'] ) ) $this->password = stripslashes( strip_tags( $data['txtLoginPassword'] ) );
-	}
-
-	public function storeFormValues( $params ) {
-	 $this->__construct( $params );
-	}
-
-	public function userLogin() {
-		$success = false;
+	public $success = false;
+	public function userLogin($username, $password) {
 		try{
-			 $stmt = $con->prepare( "CALL sp_CheckUserdetails('$username', '$passsword')" );
-			 $stmt->execute();
-
-			 if( $valid ) {
-				 $success = true;
-				 echo ('Login');
-				 exit();
-			 }
-
-			 $con = null;
-			 return $success;
-			 } catch (PDOException $e) {
+			 $object = new dbOperations;
+			 $object->userLogin($username, $password);
+			 
+		 } catch (Exception $e) {
 			 echo $e->getMessage();
 			 return $success;
 			}

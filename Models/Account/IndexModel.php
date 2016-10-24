@@ -1,11 +1,9 @@
 <?php
-header('Content-type : application/json');
-	if ( !(isset($_SESSION['loginStatus']))){
-		session_start();
-	}
+	session_start();
+
 	$rootDirectory = $_SERVER['SCRIPT_NAME'];
-	$username = json_decode($_POST['txtLoginUsername']);
-	$password = json_decode($_POST['txtLoginPassword']);
+	$username = $_POST['txtLoginUsername']	;
+	$password = $_POST['txtLoginPassword'];
 
 	class dbOperations{
 		function DBConnect() {
@@ -35,14 +33,13 @@ header('Content-type : application/json');
 		}	// end of DBConnect();
 
 		function userLogin ( $username, $password ) {
-
 			$con = $this->DBConnect();
 
 			if ($con->connect_error) {
 					die ("Connection Error : " .  $con->connect_error);
 			}
-			$result = $con->prepare("CALL sp_CheckUserdetails('$username', '$passsword')");
-			$result->execute();
+			$statement = $con->prepare("CALL sp_CheckUserdetails('$username', '$password')");
+			$result = $statement->execute();
 			if ($result === TRUE ) {
 				$_SESSION["loginStatus"] = 1;
 				$_SESSION["username"] = $username;
@@ -65,19 +62,4 @@ header('Content-type : application/json');
 			}
 			}	// end of userLogin
 	}	//end of class
-
-	$object = new dbOperations;
-	if  ( isset($_POST['action']) && !empty($_POST['action']) ) {
-		$action = $_POST['action'];
-
-		switch ($action) {
-			case 'userlogin':
-				$object->userLogin($username, $password);
-				break;
-
-			default:
-					echo "<script> alert('nothing.'); </script>";
-				break;
-		}
-	}
 ?>

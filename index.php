@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
   <html lang="en">
   <head>
 
@@ -31,21 +31,10 @@
         $("#btnLogin").on("click", function(){
           var username = $("#txtUsername").value;
           var password = $("#txtPassword").value;
-
-					$.ajax({
-					 type: "POST",
-					 url: 'Models/Account/IndexModel.php',
-					 data: {action: 'userlogin',
-									"username" : username,
-									"password" : password
-									},
-					 success: function()
-					 {
-						 alert('working');
-							window.location = 'Views/Welcome.php';
-					 }
-			 		});
-
+					if( (username==""||username==null) && (password==""||password==null) ) {
+						$("#lblStatus").show();
+						$("#txtUsername").focus();
+					}
         });
       });
 
@@ -111,8 +100,8 @@
 
                         <div class="row omb_row-sm-offset-3">
                             <div class="col-xs-12 col-sm-6">
-                                <!-- <form class="omb_loginForm" action="Models/Account/loginback.php" autocomplete="off" method="POST"> -->
-																	<form class="omb_loginForm" autocomplete="on" method="POST">
+                                <form class="omb_loginForm" action="Models/Account/IndexModel.php" autocomplete="on" method="POST">
+																<!-- <form class="omb_loginForm" action="<?php echo $_SERVER['PHP_SELF'] ?>" autocomplete="on" method="POST"> -->
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-user"></i></span>
                                         <input type="text" class="form-control" id="txtUsername"
@@ -126,9 +115,20 @@
                                         name="txtLoginPassword" placeholder="Password">
                                     </div>
                                     <span class="help-block" style="visibility:hidden;" id="lblStatus">Password error</span>
-
-                                    <button class="btn btn-lg btn-primary btn-block" id="btnLogin">Login</button>
+                                    <button class="btn btn-lg btn-primary btn-block" name="btnLogin" id="btnLogin" type="submit">Login</button>
                                 </form>
+																<?php
+																include('Models/Account/IndexModel.php');
+																$username = $_POST['txtLoginUsername'];
+																$password = $_POST['txtLoginPassword'];
+
+																if ( $_SERVER['REQUEST_METHOD'] == "POST" ){
+																	if ( ($username !== "" || $username !== null) && ($password !== "" || $password !== null)){
+																		$object = new dbOperations();
+																		$object->userLogin($username, $password);
+																	}
+																}
+																?>
                             </div>
                         </div>
                         <div class="row omb_row-sm-offset-3">
